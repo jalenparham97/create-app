@@ -57,7 +57,7 @@ async function promptForMissingOptions(options) {
       type: 'input',
       message: 'Enter a name for your app:',
       name: 'appName',
-      default: 'host',
+      default: 'my-app',
     });
   }
 

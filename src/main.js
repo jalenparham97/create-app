@@ -34,13 +34,11 @@ export async function createApp(options) {
     targetDirectory: options.appName || process.cwd(),
   };
 
+  const template = options.template.toLowerCase();
+
   const currentFileUrl = import.meta.url;
-  const templateDir = path.resolve(
-    new URL(currentFileUrl).pathname,
-    '../../templates',
-    options.template.toLowerCase()
-  );
-  console.log('templateDir: ', templateDir);
+  const pathUrl = new URL(currentFileUrl).pathname;
+  const templateDir = path.resolve(pathUrl, '../../templates', template);
   options.templateDirectory = templateDir;
 
   try {
@@ -50,7 +48,7 @@ export async function createApp(options) {
     process.exit(1);
   }
 
-  const tasks = new Listr([
+  const defaultTasks = [
     {
       title: 'Copy app files',
       task: () => copyTemplateFiles(options),
@@ -60,22 +58,29 @@ export async function createApp(options) {
       task: () => initGit(options),
       enabled: () => options.git,
     },
-    {
-      title: 'Install dependencies',
-      task: () =>
-        projectInstall({
-          cwd: options.targetDirectory,
-        }),
-      skip: () =>
-        !options.runInstall
-          ? 'Pass --install to automatically install dependencies'
-          : undefined,
-    },
-  ]);
+  ];
+
+  const tasksToRun =
+    template === 'vanilla-javascript'
+      ? defaultTasks
+      : [
+          ...defaultTasks,
+          {
+            title: 'Install dependencies',
+            task: () =>
+              projectInstall({
+                cwd: options.targetDirectory,
+              }),
+            skip: () =>
+              !options.runInstall
+                ? 'Pass --install to automatically install dependencies'
+                : undefined,
+          },
+        ];
+
+  const tasks = new Listr(tasksToRun);
 
   await tasks.run();
-  // console.log('Copy app files');
-  // await copyTemplateFiles(options);
 
   console.log('%s App is ready', chalk.green.bold('DONE'));
   return true;
