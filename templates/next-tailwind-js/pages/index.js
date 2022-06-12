@@ -12,7 +12,12 @@ export default function Home() {
       <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
         <h1 className="text-6xl font-bold">
           Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
+          <a
+            className="text-blue-600"
+            href="https://nextjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Next.js!
           </a>
         </h1>
@@ -28,6 +33,8 @@ export default function Home() {
           <a
             href="https://nextjs.org/docs"
             className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
             <p className="mt-4 text-xl">
@@ -38,6 +45,8 @@ export default function Home() {
           <a
             href="https://nextjs.org/learn"
             className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <h3 className="text-2xl font-bold">Learn &rarr;</h3>
             <p className="mt-4 text-xl">
@@ -48,6 +57,8 @@ export default function Home() {
           <a
             href="https://github.com/vercel/next.js/tree/canary/examples"
             className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <h3 className="text-2xl font-bold">Examples &rarr;</h3>
             <p className="mt-4 text-xl">
@@ -58,6 +69,8 @@ export default function Home() {
           <a
             href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
             className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
             <p className="mt-4 text-xl">
